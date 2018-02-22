@@ -7,5 +7,4 @@ public class Wall {
         this.y = y;
     }
 
-
 }
