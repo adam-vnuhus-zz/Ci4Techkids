@@ -19,7 +19,7 @@ public class GameTest {
         ArrayList<Wall> walls = new ArrayList<>();
 //        Wall w1 = new Wall(2, 3);
 //        Wall w2 = new Wall(1, 2);
-        walls.add(new Wall(3, 1));
+        walls.add(new Wall(4, 1));
         walls.add(new Wall(1, 0));
         walls.add(new Wall(1, 1));
 
@@ -27,22 +27,25 @@ public class GameTest {
         while (true) {
             for (int y = 0; y < m.width; y++) {
                 for (int x = 0; x < m.length; x++) {
+                    boolean noWall = false;
                     for (Wall wall : walls) {
                         if (wall.match(x, y)) {
                             System.out.print("W ");
-                            x++;
+                            noWall = true;
                         }
                     }
-                    if (P.match(x, y)) {
-                        System.out.print("P ");
-                    } else if (K.match(x, y) && !P.hasKey) {
-                        System.out.print("K ");
-                    } else if (E.match(x, y)) {
-                        System.out.print("E ");
-                    } else if (M.match(x, y) && !M.died) {
-                        System.out.print("M ");
-                    } else {
-                        System.out.print("- ");
+                    if (!noWall) {
+                        if (P.match(x, y)) {
+                            System.out.print("P ");
+                        } else if (K.match(x, y) && !P.hasKey) {
+                            System.out.print("K ");
+                        } else if (E.match(x, y)) {
+                            System.out.print("E ");
+                        } else if (M.match(x, y) && !M.died) {
+                            System.out.print("M ");
+                        } else {
+                            System.out.print("- ");
+                        }
                     }
                 }
                 System.out.println();
@@ -95,7 +98,7 @@ public class GameTest {
                 } while (M.hp > 0);
             }
 
-            if (M.hp == 0){
+            if (M.hp == 0) {
                 M.died = true;
             }
 
