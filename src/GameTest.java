@@ -6,7 +6,7 @@ public class GameTest {
 
         Map M = new Map(5, 4);
 
-        Player P = new Player(2, 1);
+        Player P = new Player(2, 1, false);
 
         Key K = new Key(2, 3);
 
@@ -33,7 +33,7 @@ public class GameTest {
                     }
                     if (P.match(x, y)) {
                         System.out.print("P ");
-                    } else if (K.match(x, y) && !P.hasKey()) {
+                    } else if (K.match(x, y) && !P.hasKey) {
                         System.out.print("K ");
                     } else if (E.match(x, y)) {
                         System.out.print("E ");
@@ -69,8 +69,22 @@ public class GameTest {
             if (P.x < 0) P.x = 0;
             if (P.x >= M.length) P.x = M.length - 1;
 
-            if (P.match(K.x, K.y)) {
+            for (Wall wall: walls) {
+                if (wall.match(P.x, P.y)) {
+                    P.x -= V.x;
+                    P.y -= V.y;
+                }
+            }
 
+            P.matchKey(K.x, K.y);
+
+            if (P.match(E.x, E.y)) {
+                if (P.hasKey) {
+                    System.out.println("You won!!!!!!");
+                    break;
+                } else {
+                    System.out.println("Get the key, dude!!!!");
+                }
             }
         }
     }

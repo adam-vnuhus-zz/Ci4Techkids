@@ -14,5 +14,4 @@ public class Key {
             return false;
         }
     }
-
 }
