@@ -1,11 +1,13 @@
 public class Player {
     int x = 0;
     int y = 0;
+    int attack = 0;
     boolean hasKey = false;
 
-    public Player(int x, int y, boolean hasKey) {
+    public Player(int x, int y, int atk, boolean hasKey) {
         this.x = x;
         this.y = y;
+        this.attack = atk;
         this.hasKey = hasKey;
     }
 

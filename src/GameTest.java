@@ -4,15 +4,17 @@ import java.util.Scanner;
 public class GameTest {
     public static void main(String[] args) {
 
-        Map M = new Map(5, 4);
+        Map m = new Map(5, 4);
 
-        Player P = new Player(2, 1, false);
+        Player P = new Player(2, 1, 20, false);
 
         Key K = new Key(2, 3);
 
         Exit E = new Exit(4, 3);
 
         Vector V = new Vector(0, 0);
+
+        Monster M = new Monster(3, 2, 20, false);
 
         ArrayList<Wall> walls = new ArrayList<>();
 //        Wall w1 = new Wall(2, 3);
@@ -23,8 +25,8 @@ public class GameTest {
 
 
         while (true) {
-            for (int y = 0; y < M.width; y++) {
-                for (int x = 0; x < M.length; x++) {
+            for (int y = 0; y < m.width; y++) {
+                for (int x = 0; x < m.length; x++) {
                     for (Wall wall : walls) {
                         if (wall.match(x, y)) {
                             System.out.print("W ");
@@ -37,6 +39,8 @@ public class GameTest {
                         System.out.print("K ");
                     } else if (E.match(x, y)) {
                         System.out.print("E ");
+                    } else if (M.match(x, y) && !M.died) {
+                        System.out.print("M ");
                     } else {
                         System.out.print("- ");
                     }
@@ -65,15 +69,34 @@ public class GameTest {
             P.x += V.x;
 
             if (P.y < 0) P.y = 0;
-            if (P.y >= M.width) P.y = M.width - 1;
+            if (P.y >= m.width) P.y = m.width - 1;
             if (P.x < 0) P.x = 0;
-            if (P.x >= M.length) P.x = M.length - 1;
+            if (P.x >= m.length) P.x = m.length - 1;
 
-            for (Wall wall: walls) {
+            for (Wall wall : walls) {
                 if (wall.match(P.x, P.y)) {
                     P.x -= V.x;
                     P.y -= V.y;
                 }
+            }
+
+            if (P.x == M.x && P.y == M.y) {
+                System.out.println("1.Fight!!!");
+                System.out.println("2.Running.");
+                do {
+                    System.out.print("Your choice: ");
+                    int choice = keyboardScanner.nextInt();
+                    if (choice == 1) {
+                        M.hp = P.attack - M.hp;
+                        System.out.println("M.hp: " + M.hp);
+                    } else if (choice == 2) {
+                        break;
+                    }
+                } while (M.hp > 0);
+            }
+
+            if (M.hp == 0){
+                M.died = true;
             }
 
             P.matchKey(K.x, K.y);
