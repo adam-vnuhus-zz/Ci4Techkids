@@ -17,7 +17,10 @@ public class GameCanvas extends JPanel {
 
     int positionPlayerX;
     int positionPlayerY;
-    int positionSquareY;
+    int positionSquareY = 0;
+    int positionSquareX = 0;
+    int vectorX = 5;
+    int vectorY = 5;
 
     public GameCanvas() {
 
@@ -51,14 +54,25 @@ public class GameCanvas extends JPanel {
 
     public void run() {
 
-        this.positionSquareY += 5;
+        //Bouncing square
+        if (positionSquareX < 0 || positionSquareX >= this.getWidth()) {
+            vectorX = -vectorX;
+        }
+
+        if (positionSquareY < 0 || positionSquareY >= this.getHeight()) {
+            vectorY = -vectorY;
+        }
+
+        positionSquareX += vectorX;
+        positionSquareY += vectorY;
+
     }
 
     public void renderAll() {
 
         this.graphics.drawImage(this.background, 0, 0, null);
         this.graphics.drawImage(this.player, this.positionPlayerX, this.positionPlayerY, null);
-        this.graphics.drawImage(this.square, 100, this.positionSquareY, null);
+        this.graphics.drawImage(this.square, positionSquareX, positionSquareY, null);
         this.repaint();
     }
 }

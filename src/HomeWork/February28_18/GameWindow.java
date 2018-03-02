@@ -37,6 +37,7 @@ public class GameWindow extends JFrame {
 
     public void gameLoop() {
 
+//        System.out.println(GameWindow.this.getWidth());
         while (true) {
             long currentTime = System.nanoTime();
             if (currentTime - lastTime >= 17_000_000) {
