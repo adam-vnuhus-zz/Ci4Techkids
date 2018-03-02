@@ -1,4 +1,4 @@
-package HomeWork.February28_18;
+package Homeworks.GeoArcade.February28_18;
 
 public class Main {
     public static void main(String[] args) {
