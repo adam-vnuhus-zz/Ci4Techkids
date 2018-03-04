@@ -18,11 +18,11 @@ public class GameWindow extends JFrame {
 
 //        System.exit(1);
         this.listener();
-        this.setVisible(true);
     }
 
     private void setUp() {
         this.setSize(400, 600);
+        this.setVisible(true);
     }
 
     private void setUpGameCanvas() {
