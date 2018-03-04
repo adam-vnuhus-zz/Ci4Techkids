@@ -19,8 +19,8 @@ public class GameCanvas extends JPanel {
     int positionPlayerY;
     int positionSquareY = 0;
     int positionSquareX = 0;
-    int vectorX = 5;
-    int vectorY = 5;
+    int vectorSquareX = 5;
+    int vectorSquareY = 5;
 
     public GameCanvas() {
 
@@ -56,15 +56,15 @@ public class GameCanvas extends JPanel {
 
         //Bouncing square
         if (positionSquareX < 0 || positionSquareX >= this.getWidth()) {
-            vectorX = -vectorX;
+            vectorSquareX = -vectorSquareX;
         }
 
         if (positionSquareY < 0 || positionSquareY >= this.getHeight()) {
-            vectorY = -vectorY;
+            vectorSquareY = -vectorSquareY;
         }
 
-        positionSquareX += vectorX;
-        positionSquareY += vectorY;
+        positionSquareX += vectorSquareX;
+        positionSquareY += vectorSquareY;
 
     }
 
