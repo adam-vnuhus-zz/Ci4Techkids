@@ -31,11 +31,11 @@ public class GameWindow extends JFrame {
     }
 
     private void listener() {
-        this.mouseMotionListner();
+        this.mouseMotionListener();
         this.windowListener();
     }
 
-    private void mouseMotionListner() {
+    private void mouseMotionListener() {
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
