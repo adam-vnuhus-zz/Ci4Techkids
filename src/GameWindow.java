@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GameWindow extends JFrame {
 
@@ -18,8 +20,19 @@ public class GameWindow extends JFrame {
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
-                gameCanvas.player.x = e.getX();
-                gameCanvas.player.y = e.getY();
+                if (e.getX() > 40 && e.getX() < 409 && e.getY() > 44 && e.getY() < 600) {
+                    gameCanvas.player.x = e.getX() - 48;
+                    gameCanvas.player.y = e.getY() - 42;
+
+                }
+
+                /*if (e.getY() > 0 && e.getY() < 590)*/
+            }
+        });
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(1);
             }
         });
     }
@@ -30,8 +43,8 @@ public class GameWindow extends JFrame {
 
             long currentTime = System.nanoTime();
             if (currentTime - lastTime >= 17_000_000) {
-
                 this.gameCanvas.renderAll();
+                this.gameCanvas.runAll();
                 this.repaint();
                 lastTime = currentTime;
             }
