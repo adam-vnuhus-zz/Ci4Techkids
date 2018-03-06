@@ -12,26 +12,45 @@ public class GameWindow extends JFrame {
 
     public GameWindow() {
 
+        this.setGameCanvas();
+        this.setGameWindow();
+        this.setMouseMotionListener();
+        this.setWindowListener();
+    }
+
+    public void setGameWindow() {
+
         this.setSize(400, 600);
+        this.setVisible(true);
+    }
+
+    public void setGameCanvas() {
+
         this.gameCanvas = new GameCanvas();
         this.add(gameCanvas);
-        this.setVisible(true);
+    }
+
+    public void setMouseMotionListener() {
 
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
+
                 if (e.getX() > 40 && e.getX() < 409 && e.getY() > 44 && e.getY() < 600) {
                     gameCanvas.player.x = e.getX() - 48;
                     gameCanvas.player.y = e.getY() - 42;
 
                 }
-
-                /*if (e.getY() > 0 && e.getY() < 590)*/
             }
         });
+    }
+
+    public void setWindowListener() {
+
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+
                 System.exit(1);
             }
         });

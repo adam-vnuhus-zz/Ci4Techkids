@@ -30,31 +30,10 @@ public class GameCanvas extends JPanel {
 
     public GameCanvas() {
 
-        this.setSize(400, 600);
-        this.setVisible(true);
-        this.backBuffered = new BufferedImage(400, 600, BufferedImage.TYPE_4BYTE_ABGR);
-        this.graphics = this.backBuffered.getGraphics();
-
-        background = new Background();
-        background.setX(0);
-        background.setY(0);
-        try {
-
-            this.background = new Background(ImageIO.read(new File("resources/background/background.png"))
-                    , background.getX(), background.getY());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        player = new Player();
-        player.setX(200);
-        player.setY(200);
-        try {
-
-            this.player = new Player(ImageIO.read(new File("resources/player/straight.png"))
-                    , player.getX(), player.getY());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.setGameCanvas();
+        this.setBackBuffered();
+        this.setBackground();
+        this.setPlayer();
         this.squares = new Vector<>();
         this.mediumSquares = new Vector<>();
         this.mediumSquareBullets = new Vector<>();
@@ -67,16 +46,44 @@ public class GameCanvas extends JPanel {
         g.drawImage(this.backBuffered, 0, 0, null);
     }
 
-    public void renderAll() {
+    public void setGameCanvas() {
 
-        this.background.render(this.graphics);
-        this.player.render(this.graphics);
-        this.squares.forEach(square -> square.render(graphics));
-        this.mediumSquares.forEach(mediumSquare -> mediumSquare.render(graphics));
-        this.mediumSquareBullets.forEach(mediumSquareBullet -> mediumSquareBullet.render(graphics));
-        this.bullets.forEach(bullet -> bullet.render(graphics));
-        /*this.square.render(this.graphics);*/
-        this.repaint();
+        this.setSize(400, 600);
+        this.setVisible(true);
+    }
+
+    public void setBackBuffered() {
+
+        this.backBuffered = new BufferedImage(400, 600, BufferedImage.TYPE_4BYTE_ABGR);
+        this.graphics = this.backBuffered.getGraphics();
+    }
+
+    public void setBackground() {
+
+        background = new Background();
+        background.setX(0);
+        background.setY(0);
+        try {
+
+            this.background = new Background(ImageIO.read(new File("resources/background/background.png"))
+                    , background.getX(), background.getY());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setPlayer() {
+
+        player = new Player();
+        player.setX(200);
+        player.setY(200);
+        try {
+
+            this.player = new Player(ImageIO.read(new File("resources/player/straight.png"))
+                    , player.getX(), player.getY());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void createSquare() {
@@ -213,11 +220,22 @@ public class GameCanvas extends JPanel {
         bullets.forEach(bullet -> bullet.move());
     }
 
+    public void renderAll() {
+
+        this.background.render(this.graphics);
+        this.player.render(this.graphics);
+        this.squares.forEach(square -> square.render(graphics));
+        this.mediumSquares.forEach(mediumSquare -> mediumSquare.render(graphics));
+        this.mediumSquareBullets.forEach(mediumSquareBullet -> mediumSquareBullet.render(graphics));
+        this.bullets.forEach(bullet -> bullet.render(graphics));
+        this.repaint();
+    }
+
     public void runAll() {
 
         this.runSquares();
-        runMediumSquares();
-        runMediumSquareBullets();
-        runBullets();
+        this.runMediumSquares();
+        this.runMediumSquareBullets();
+        this.runBullets();
     }
 }
