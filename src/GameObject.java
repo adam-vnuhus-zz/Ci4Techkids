@@ -10,6 +10,7 @@ public class GameObject {
     private static Vector<GameObject> vector = new Vector<>();
     private static Vector<GameObject> temp = new Vector<>();
 
+
     public static void runAll() {
         vector.forEach(gameObject -> gameObject.run());
         vector.addAll(temp);
@@ -18,6 +19,7 @@ public class GameObject {
 
     public static void renderAll(Graphics graphics) {
         vector.forEach(gameObject -> gameObject.render(graphics));
+
     }
 
     public static void add(GameObject gameObject) {

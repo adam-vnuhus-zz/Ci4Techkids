@@ -1,10 +1,10 @@
 import java.util.Random;
 
-public class EnemySqawner extends GameObject {
+public class EnemySpawner extends GameObject {
     private int count = 0;
     private Random random;
 
-    public EnemySqawner() {
+    public EnemySpawner() {
         this.random = new Random();
     }
 
