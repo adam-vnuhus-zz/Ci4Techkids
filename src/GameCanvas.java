@@ -14,11 +14,18 @@ public class GameCanvas extends JPanel {
         this.setupBackground();
         this.setupPlayer();
         GameObject.add(new SquareSpawner());
-        GameObject.add(new EnemySqawner());
+//        GameObject.add(new EnemySqawner());
         MatrixSquare matrixSquare = new MatrixSquare();
-        matrixSquare.position.set(20, 20);
-        matrixSquare.velocity.set(3, 0);
-        matrixSquare.create();
+//        matrixSquare.position.set(20, 20);
+//        matrixSquare.velocity.set(3, 0);
+//        matrixSquare.create();
+
+        CircleEnemy circleEnemy = new CircleEnemy();
+        circleEnemy.position.set(0, 0);
+        circleEnemy.velocity.set(3, 0);
+        circleEnemy.create();
+        GameObject.add(circleEnemy);
+
         GameObject.add(matrixSquare);
     }
 

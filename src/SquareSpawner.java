@@ -14,8 +14,8 @@ public class SquareSpawner extends GameObject {
         super.run();
         if (this.frameCounter.run()) {
             Square square = new Square();
-            square.position.set(random.nextInt(400), 0);
-            square.velocity.set(0, random.nextInt(4) + 2);
+            square.position.set(50, 40);
+            square.velocity.set(0, 1);
             GameObject.add(square);
         }
     }
