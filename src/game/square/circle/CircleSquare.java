@@ -5,13 +5,21 @@ import base.GameObjectManager;
 import base.Vector2D;
 import game.square.Square;
 
+import java.util.Vector;
+
 /**
  * Created by huynq on 3/15/18.
  */
 public class CircleSquare extends GameObject {
 
-    public CircleSquare() {
+    private Vector<Square> squares;
+    public Vector2D velocity;
+    private int count;
 
+    public CircleSquare() {
+        this.squares = new Vector<>();
+        this.velocity = new Vector2D();
+        this.count = 0;
     }
 
     public void create() {
@@ -20,7 +28,37 @@ public class CircleSquare extends GameObject {
             Vector2D vector2D = new Vector2D(0, 80); //vector goc
             Vector2D rotate = vector2D.rotate(angle); //quay vector goc
             square.position.set(rotate).addUp(100, 100); //gan rotate vao position
+
+            square.velocity.set(this.velocity);
+            this.squares.add(square);
             GameObjectManager.instance.add(square);
         }
+    }
+
+    @Override
+    public void run() {
+        super.run();
+        if (this.position.x <= 0 ) {
+            if (this.count >= 10) {
+                this.count = 0;
+                this.velocity.set(1, 0);
+            } else {
+                this.velocity.set(0, 1);
+                this.count += 1;
+            }
+
+        }
+        if (this.position.x >= 400 - 20 * 5 - 20 * 4){
+            if (this.count >= 10) {
+                this.count = 0;
+                this.velocity.set(-1, 0);
+            } else {
+                this.velocity.set(0, 1);
+                this.count += 1;
+            }
+
+        }
+        this.position.addUp(this.velocity);
+        this.squares.forEach(square -> square.velocity.set(velocity));
     }
 }

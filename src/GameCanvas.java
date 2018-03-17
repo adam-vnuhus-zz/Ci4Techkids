@@ -46,6 +46,7 @@ public class GameCanvas extends JPanel {
     private void setCircleSquare() {
         CircleSquare circleSquare = new CircleSquare();
         circleSquare.position.set(100, 100);
+        circleSquare.velocity.set(1, 0);
         circleSquare.create();
         GameObjectManager.instance.add(circleSquare);
     }
