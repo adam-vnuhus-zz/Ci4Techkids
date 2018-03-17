@@ -69,6 +69,19 @@ public class GameObjectManager {
                 .orElse(null);
     }
 
+    public Player checkCollisionPlayer(BoxCollider other) {
+        return (Player) this.vector
+                .stream()
+                .filter(gameObject -> gameObject.isAlive) //lay object con song
+                .filter(gameObject -> gameObject instanceof Player) //Lay con Square
+                .filter(gameObject -> {
+                    BoxCollider boxCollider = ((Player) gameObject).boxCollider; //Lay BoxCollider
+                    return boxCollider.checkCollider(other); // lay square dang co box chong len nhau
+                })
+                .findFirst()
+                .orElse(null);
+    }
+
     public void add(GameObject gameObject) {
         this.temp.add(gameObject);
     }
