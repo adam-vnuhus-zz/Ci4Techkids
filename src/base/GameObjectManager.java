@@ -1,5 +1,6 @@
 package base;
 
+import game.enemy.Enemy;
 import game.player.Player;
 import game.square.Square;
 import physic.BoxCollider;
@@ -49,6 +50,19 @@ public class GameObjectManager {
                 .filter(gameObject -> gameObject instanceof Square) //Lay con Square
                 .filter(gameObject -> {
                     BoxCollider boxCollider = ((Square) gameObject).boxCollider; //Lay BoxCollider
+                    return boxCollider.checkCollider(other); // lay square dang co box chong len nhau
+                })
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Enemy checkCollisionEnemy(BoxCollider other) {
+        return (Enemy) this.vector
+                .stream()
+                .filter(gameObject -> gameObject.isAlive) //lay object con song
+                .filter(gameObject -> gameObject instanceof Enemy) //Lay con Square
+                .filter(gameObject -> {
+                    BoxCollider boxCollider = ((Enemy) gameObject).boxCollider; //Lay BoxCollider
                     return boxCollider.checkCollider(other); // lay square dang co box chong len nhau
                 })
                 .findFirst()
